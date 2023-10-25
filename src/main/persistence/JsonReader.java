@@ -13,6 +13,9 @@ import java.nio.file.Paths;
 import java.util.stream.Stream;
 
 // Represents a reader that reads ListsMaker from JSON data stored in file
+
+// Based on the code structure from JsonSerializationDemo
+// URL: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
 public class JsonReader {
     private String source;
 
@@ -26,7 +29,7 @@ public class JsonReader {
     public ListsMaker read() throws IOException {
         String jsonData = readFile(source);
         JSONObject jsonObject = new JSONObject(jsonData);
-        return parseWorkRoom(jsonObject);
+        return parseListMaker(jsonObject);
     }
 
     // EFFECTS: reads source file as string and returns it
@@ -41,7 +44,7 @@ public class JsonReader {
     }
 
     // EFFECTS: parses ListsMaker from JSON object and returns it
-    private ListsMaker parseWorkRoom(JSONObject jsonObject) {
+    private ListsMaker parseListMaker(JSONObject jsonObject) {
         String name = jsonObject.getString("name");
         ListsMaker lm = new ListsMaker(name);
         addWorkouts(lm, jsonObject);

@@ -9,6 +9,9 @@ import org.json.JSONObject;
 import java.io.*;
 
 // Represents a writer that writes JSON representation of ListsMaker to file
+
+// Based on the code structure from JsonSerializationDemo
+// URL: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
 public class JsonWriter {
     private static final int TAB = 4;
     private PrintWriter writer;
