@@ -1,16 +1,31 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 
-public class ListsMaker {
+// Makes a List with all the operations for both meals and workouts
+
+// Based on the code structure from JsonSerializationDemo
+// URL: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
+public class ListsMaker implements Writable {
     private ArrayList<Workout> workouts;
     private ArrayList<Workout> workoutsByDay;
     private ArrayList<Meal> meals;
     private ArrayList<Meal> mealsByDay;
+    private String name;
 
-    public ListsMaker() {
+    // EFFECTS: constructs a ListsMaker with empty workouts and meals list, and a given name
+    public ListsMaker(String name) {
         this.workouts = new ArrayList<>();
         this.meals = new ArrayList<>();
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
     }
 
     // WORKOUT
@@ -82,5 +97,34 @@ public class ListsMaker {
 
     public ArrayList<Meal> getMealsByDay() {
         return mealsByDay;
+    }
+
+
+    // EFFECTS: constructs three different files in the json file
+    @Override
+    public JSONObject toJson() {
+        JSONObject json  = new JSONObject();
+        json.put("name", name);
+        json.put("workouts", workoutsToJson());
+        json.put("meals", mealsToJson());
+        return json;
+    }
+
+    // EFFECTS: returns all workouts that are in this list as a JSONArray
+    private JSONArray workoutsToJson() {
+        JSONArray jsonArray = new JSONArray();
+        for (Workout workout : workouts) {
+            jsonArray.put(workout.toJson());
+        }
+        return jsonArray;
+    }
+
+    // EFFECTS: returns all meals that are in this list as a JSONArray
+    private JSONArray mealsToJson() {
+        JSONArray jsonArray = new JSONArray();
+        for (Meal meal : meals) {
+            jsonArray.put(meal.toJson());
+        }
+        return jsonArray;
     }
 }

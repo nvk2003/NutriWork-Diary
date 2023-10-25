@@ -3,22 +3,32 @@ package ui;
 import model.ListsMaker;
 import model.Meal;
 import model.Workout;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 // Workouts and Meal Plan Managing System Application
 
-// Based on the code structure from TellerApp
+// Based on the code structure from TellerApp and JsonSerializationDemo
 // URL: https://github.students.cs.ubc.ca/CPSC210/TellerApp
+// URL: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
 public class NutriWorkDiary {
+    private static final String JSON_STORE = "./data/workoutsAndMeals.json";
     private ListsMaker workoutsAndMeals;
     private Scanner input;
     private String day;
     private ArrayList<String> days;
+    private JsonReader jsonReader;
+    private JsonWriter jsonWriter;
 
     // EFFECTS: runs the NutriWorkDiary Application
-    public NutriWorkDiary() {
+    public NutriWorkDiary() throws FileNotFoundException {
+        jsonReader = new JsonReader(JSON_STORE);
+        jsonWriter = new JsonWriter(JSON_STORE);
         runApp();
     }
 
@@ -27,7 +37,7 @@ public class NutriWorkDiary {
     private void runApp() {
         days = new ArrayList<>();
         setDays();
-        workoutsAndMeals = new ListsMaker();
+        workoutsAndMeals = new ListsMaker("Workouts and Meals");
         input = new Scanner(System.in);
         input.useDelimiter("\n");
         String entryValue;
@@ -55,6 +65,8 @@ public class NutriWorkDiary {
         System.out.println("\tm -> Meals");
         System.out.println("\tv -> View Both Workout & Meals");
         System.out.println("\td -> View Both Workout & Meals By Day");
+        System.out.println("\ts -> Save Workouts & Meals");
+        System.out.println("\tl -> Load Workouts & Meals");
         System.out.println("\tq -> Quit");
     }
 
@@ -84,6 +96,10 @@ public class NutriWorkDiary {
             viewWorkoutAndMeal();
         } else if (entryValue.equals("d")) {
             viewWorkoutAndMealByDay();
+        } else if (entryValue.equals("s")) {
+            saveWorkoutsAndMeals();
+        } else if (entryValue.equals("l")) {
+            loadWorkoutsAndMeals();
         } else {
             System.out.println("\nPlease Insert Valid Input  !!!");
         }
@@ -132,10 +148,41 @@ public class NutriWorkDiary {
         System.out.println("\nPlease Insert Workout Details:");
         System.out.println("Enter Workout Name: ");
         String name = input.next();
+
+//        // WORK ON THIS
+////        int sets = input.nextInt();
+//        int sets = 0;
+//        while (sets == 0) {
+//
+//            try {
+//                System.out.println("Enter No. of Sets: ");
+//                sets = input.nextInt();
+//            } catch (Exception e) {
+//                System.out.println("Please insert only Integers");
+////                break;
+//            }
+//        }
+//
+//        // WORK ON THIS
+//        int reps = 0;
+//        while (reps == 0) {
+//            System.out.println("Enter No. of Reps: ");
+////        int reps = input.nextInt();
+//            try {
+//                reps = input.nextInt();
+////                break;
+//            } catch (Exception e) {
+//                System.out.println("Please insert only Integers");
+////                break;
+//            }
+//        }
         System.out.println("Enter No. of Sets: ");
         int sets = input.nextInt();
+
         System.out.println("Enter No. of Reps: ");
         int reps = input.nextInt();
+
+
 
         setDay();
 
@@ -446,5 +493,30 @@ public class NutriWorkDiary {
         System.out.println("\n==========================================");
 
         viewMeals();
+    }
+
+
+    // EFFECTS: saves all workouts and meals to the file
+    private void saveWorkoutsAndMeals() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(workoutsAndMeals);
+            jsonWriter.close();
+            System.out.println("\nSaved " +  workoutsAndMeals.getName() + " to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+
+    // MODIFIES: this, workoutsAndMeals
+    // EFFECTS: loads all workouts and meals from the file
+    private void loadWorkoutsAndMeals() {
+        try {
+            workoutsAndMeals = jsonReader.read();
+            System.out.println("\nLoaded " + workoutsAndMeals.getName() + " from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
     }
 }

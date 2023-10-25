@@ -1,7 +1,13 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 // Represents a class that can make a Single Workout
-public class Workout {
+
+// Based on the code structure from JsonSerializationDemo
+// URL: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
+public class Workout implements Writable {
     private String name;
     private int reps;
     private int sets;
@@ -46,5 +52,15 @@ public class Workout {
         return workout;
     }
 
+    // EFFECTS: constructs a single workout in the json file with all details that are assigned to various Strings
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("sets", sets);
+        json.put("reps", reps);
+        json.put("day", day);
+        return json;
+    }
 
 }

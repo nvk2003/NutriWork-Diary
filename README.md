@@ -31,3 +31,5 @@ their meal and workout routines.
 - As a user, I want to be able to delete all my meals from the list.
 - As a user, I want to be able to view both workouts and meals together.
 - As a user, I want to be able to view both workouts and meals together that are sorted by the days in a week.
+- As a user, I want to be able to save both workouts and meals while using the application for future use.
+- As a user, I want to be able to load both the workouts and meals data when I reopen the application.

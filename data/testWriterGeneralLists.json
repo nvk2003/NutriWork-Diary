@@ -1,0 +1,15 @@
+{
+    "workouts": [{
+        "reps": 10,
+        "sets": 5,
+        "name": "Squats",
+        "day": "Monday"
+    }],
+    "name": "General Workouts and Meals",
+    "meals": [{
+        "mealTime": "Lunch",
+        "name": "Rice",
+        "calories": 50,
+        "day": "Tuesday"
+    }]
+}

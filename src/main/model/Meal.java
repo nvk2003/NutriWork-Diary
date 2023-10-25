@@ -1,7 +1,13 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 // Represents a class that can make a single new Meal
-public class Meal {
+
+// Based on the code structure from JsonSerializationDemo
+// URL: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
+public class Meal implements Writable {
     private String name;
     private double calories;
     private String mealTime;
@@ -44,5 +50,16 @@ public class Meal {
     public String getMeal() {
         makeMeal();
         return meal;
+    }
+
+    // EFFECTS: constructs a single meal in the json file with all details that are assigned to various Strings
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("calories", calories);
+        json.put("mealTime", mealTime);
+        json.put("day", day);
+        return json;
     }
 }

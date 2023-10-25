@@ -10,13 +10,14 @@ public class ListsMakerTest {
 
     @BeforeEach
     void runBefore() {
-        testListsMaker = new ListsMaker();
+        testListsMaker = new ListsMaker("Test List");
     }
 
     @Test
     void testConstructor() {
         assertEquals(0, testListsMaker.getWorkouts().size());
         assertEquals(0, testListsMaker.getMeals().size());
+        assertEquals("Test List", testListsMaker.getName());
     }
 
     @Test
