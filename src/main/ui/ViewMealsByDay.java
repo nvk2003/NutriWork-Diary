@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+// Represents a View Meals By Day window to the user
 public class ViewMealsByDay extends JFrame {
     private static final int WIDTH = 800;
     private static final int HEIGHT = 450;
@@ -21,6 +22,7 @@ public class ViewMealsByDay extends JFrame {
 
     private ArrayList<String> days = new ArrayList<>();
 
+    // EFFECTS: constructs a GUI for the View Meals By Day window
     public ViewMealsByDay(ListsMaker workoutsAndMeals) {
         super("View Meals By Day");
 
@@ -31,6 +33,7 @@ public class ViewMealsByDay extends JFrame {
         setVisible(true);
     }
 
+    // EFFECTS: creates the main window for viewing the meals by day
     private void mainWindow() {
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
         setMinimumSize(new Dimension(WIDTH, HEIGHT));
@@ -44,6 +47,7 @@ public class ViewMealsByDay extends JFrame {
         arrangeOnMainWindow();
     }
 
+    // EFFECTS: arranges the list of meals by day onto the main window
     private void arrangeOnMainWindow() {
         panel = new JPanel();
         add(panel);
@@ -55,6 +59,7 @@ public class ViewMealsByDay extends JFrame {
     }
 
 
+    // EFFECTS: arranges the list of meals by day onto the window correctly
     private void makeListsOnPanel() {
         mealTableModel = new DefaultTableModel();
         mealsTable = new JTable(mealTableModel) {
@@ -74,6 +79,7 @@ public class ViewMealsByDay extends JFrame {
         panel.add(new JScrollPane(mealsTable), BorderLayout.CENTER);
     }
 
+    // EFFECTS: makes the list of meals by day that can be printed onto the window
     private void makeList() {
         mealTableModel.addRow(new Object[]{"All Meals By Day: "});
         for (String day : getDays()) {
@@ -99,6 +105,7 @@ public class ViewMealsByDay extends JFrame {
         }
     }
 
+    // EFFECTS: makes a list of days in a week
     private void makeDays() {
         days.add("Monday");
         days.add("Tuesday");
@@ -110,10 +117,13 @@ public class ViewMealsByDay extends JFrame {
     }
 
 
+    // EFFECTS: returns the list of days of a week
     private ArrayList<String> getDays() {
         return days;
     }
 
+    // EFFECTS: sets the conditions for the table
+    //          to print out the list of meals by day correctly
     private void mealsTableConditions() {
         mealsTable.setRowSelectionAllowed(false);
         mealsTable.setFocusable(false);
@@ -121,6 +131,7 @@ public class ViewMealsByDay extends JFrame {
         mealsTable.setRowHeight(23);
     }
 
+    // EFFECTS: adds all the buttons onto the window
     private void makeButtonsOnPanel() {
         JPanel buttonPanel = new JPanel();
 //        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
@@ -141,6 +152,7 @@ public class ViewMealsByDay extends JFrame {
     }
 
 
+    // EFFECTS: creates the Done Button that can be added onto the window
     private JButton doneButton() {
         JButton doneButton = new JButton("Done");
         doneButton.setCursor(handCursor);
@@ -157,6 +169,8 @@ public class ViewMealsByDay extends JFrame {
         return doneButton;
     }
 
+    // EFFECTS: creates the View Meals button that can be
+    //          used by the user to view the list of meals all at once
     private JButton viewMealsButton() {
         JButton viewMealsButton = new JButton("View Meals");
         viewMealsButton.setCursor(handCursor);

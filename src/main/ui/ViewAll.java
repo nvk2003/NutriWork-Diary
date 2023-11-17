@@ -10,6 +10,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+// Represents a View All window to view both Meals and Workouts Side by Side
 public class ViewAll extends JFrame {
     private static final int WIDTH = 800;
     private static final int HEIGHT = 450;
@@ -24,6 +25,7 @@ public class ViewAll extends JFrame {
     private JTable mealTable;
 
 
+    // EFFECTS: constructs the GUI for the View All window
     public ViewAll(ListsMaker workoutsAndMeals) {
         super("View Both Workouts & Meals");
 
@@ -33,6 +35,8 @@ public class ViewAll extends JFrame {
         setVisible(true);
     }
 
+    // EFFECTS: creates a main window with all the details
+    //          for the user to view both Meals and Workouts
     private void mainWindow() {
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
         setMinimumSize(new Dimension(WIDTH, HEIGHT));
@@ -46,6 +50,7 @@ public class ViewAll extends JFrame {
         arrangeOnMainWindow();
     }
 
+    // EFFECTS: arranges both the lists onto the View ALl window
     private void arrangeOnMainWindow() {
         panel = new JPanel();
         add(panel);
@@ -63,6 +68,7 @@ public class ViewAll extends JFrame {
         panel.add(buttonsPanel, BorderLayout.PAGE_END);
     }
 
+    // EFFECTS: makes the Workouts list that prints onto the View All window
     private void makeWorkoutListOnPanel() {
         workoutTableModel = new DefaultTableModel();
         workoutTable = new JTable(workoutTableModel) {
@@ -93,6 +99,7 @@ public class ViewAll extends JFrame {
 
     }
 
+    // EFFECTS: sets the conditions for the Workout list to printout correctly
     private void workoutTableConditions() {
         workoutTable.setRowSelectionAllowed(false);
         workoutTable.setFocusable(false);
@@ -100,6 +107,7 @@ public class ViewAll extends JFrame {
         workoutTable.setRowHeight(23);
     }
 
+    // EFFECTS: makes the Meals list that prints onto the View All window
     private void makeMealsListOnPanel() {
         mealsTableModel = new DefaultTableModel();
         mealTable = new JTable(mealsTableModel) {
@@ -129,6 +137,7 @@ public class ViewAll extends JFrame {
         listsPanel.add(new JScrollPane(mealTable));
     }
 
+    // EFFECTS: sets the conditions for the Meals list to printout correctly
     private void mealsTableConditions() {
         mealTable.setRowSelectionAllowed(false);
         mealTable.setFocusable(false);
@@ -137,10 +146,7 @@ public class ViewAll extends JFrame {
     }
 
 
-
-
-
-
+    // EFFECTS: adds all the buttons to the View All Window
     private void makeButtonsOnPanel() {
         buttonsPanel = new JPanel();
 //        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
@@ -157,6 +163,7 @@ public class ViewAll extends JFrame {
     }
 
 
+    // EFFECTS: creates Done Button that can be added to the View All Window
     private JButton doneButton() {
         JButton doneButton = new JButton("Done");
         doneButton.setCursor(handCursor);

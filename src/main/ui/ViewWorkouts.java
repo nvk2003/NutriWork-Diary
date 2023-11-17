@@ -9,6 +9,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+// Represents a View Workouts Window to the user
 public class ViewWorkouts extends JFrame {
     private static final int WIDTH = 800;
     private static final int HEIGHT = 450;
@@ -19,6 +20,7 @@ public class ViewWorkouts extends JFrame {
     private DefaultTableModel workoutTableModel;
     private int serialNo = 1;
 
+    // EFFECTS: constructs the GUI for the View Workouts Window
     public ViewWorkouts(ListsMaker workoutsAndMeals) {
         super("View Workouts");
 
@@ -28,6 +30,7 @@ public class ViewWorkouts extends JFrame {
         setVisible(true);
     }
 
+    // EFFECTS: creates the main window for the View Workouts
     private void mainWindow() {
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
         setMinimumSize(new Dimension(WIDTH, HEIGHT));
@@ -41,6 +44,7 @@ public class ViewWorkouts extends JFrame {
         arrangeOnMainWindow();
     }
 
+    // EFFECTS: arranges the buttons and list of workouts onto the window
     private void arrangeOnMainWindow() {
         panel = new JPanel();
         add(panel);
@@ -51,6 +55,7 @@ public class ViewWorkouts extends JFrame {
         makeButtonsOnPanel();
     }
 
+    // EFFECTS: makes the list of workouts that can be printed onto the window
     private void makeListsOnPanel() {
         workoutTableModel = new DefaultTableModel();
         workoutTable = new JTable(workoutTableModel) {
@@ -80,6 +85,7 @@ public class ViewWorkouts extends JFrame {
         panel.add(new JScrollPane(workoutTable), BorderLayout.CENTER);
     }
 
+    // EFFECTS: sets the conditions for the list of workouts to be printed onto the window
     private void workoutTableConditions() {
         workoutTable.setRowSelectionAllowed(false);
         workoutTable.setFocusable(false);
@@ -87,6 +93,7 @@ public class ViewWorkouts extends JFrame {
         workoutTable.setRowHeight(23);
     }
 
+    // EFFECTS: adds the buttons onto the window
     private void makeButtonsOnPanel() {
         JPanel buttonPanel = new JPanel();
 //        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
@@ -106,7 +113,7 @@ public class ViewWorkouts extends JFrame {
 
     }
 
-
+    // EFFECTS: creates a Done Button that can be added onto the window
     private JButton doneButton() {
         JButton doneButton = new JButton("Done");
         doneButton.setCursor(handCursor);
@@ -123,6 +130,8 @@ public class ViewWorkouts extends JFrame {
         return doneButton;
     }
 
+    // EFFECTS: creates a View Workouts By Day button that can be
+    //          used for the user to view the workouts of a week separated by day
     private JButton viewWorkoutsByDayButton() {
         JButton viewWorkoutsByDayButton = new JButton("View Workouts By Day");
         viewWorkoutsByDayButton.setCursor(handCursor);

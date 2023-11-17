@@ -11,6 +11,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+// Represents a View All By Day window
+// to view both Meals and Workouts Side by Side With Their Days
 public class ViewAllByDay extends JFrame {
     private static final int WIDTH = 800;
     private static final int HEIGHT = 450;
@@ -25,7 +27,7 @@ public class ViewAllByDay extends JFrame {
     private JTable mealTable;
     private ArrayList<String> days = new ArrayList<>();
 
-
+    // EFFECTS: constructs the GUI for the View All By Day window
     public ViewAllByDay(ListsMaker workoutsAndMeals) {
         super("View Both Workouts & Meals By Day");
 
@@ -35,6 +37,8 @@ public class ViewAllByDay extends JFrame {
         setVisible(true);
     }
 
+    // EFFECTS: creates a main window with all the details
+    //          for the user to view both Meals and Workouts By Day
     private void mainWindow() {
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
         setMinimumSize(new Dimension(WIDTH, HEIGHT));
@@ -48,6 +52,7 @@ public class ViewAllByDay extends JFrame {
         arrangeOnMainWindow();
     }
 
+    // EFFECTS: arranges both the lists onto the View ALl By Day window
     private void arrangeOnMainWindow() {
         panel = new JPanel();
         add(panel);
@@ -65,6 +70,7 @@ public class ViewAllByDay extends JFrame {
         panel.add(buttonsPanel, BorderLayout.PAGE_END);
     }
 
+    // EFFECTS: adds the Workouts list that prints onto the View All By Day window
     private void makeWorkoutListOnPanel() {
         workoutTableModel = new DefaultTableModel();
         workoutTable = new JTable(workoutTableModel) {
@@ -84,6 +90,7 @@ public class ViewAllByDay extends JFrame {
         listsPanel.add(new JScrollPane(workoutTable), BorderLayout.CENTER);
     }
 
+    // EFFECTS: makes the Workouts list that can be printed onto the View All By Day window
     private void makeWorkoutsList() {
         workoutTableModel.addRow(new Object[]{"All Workouts By Day: "});
         for (String day : getDays()) {
@@ -108,6 +115,7 @@ public class ViewAllByDay extends JFrame {
         }
     }
 
+    // EFFECTS: sets the conditions for the Workout list to printout correctly
     private void workoutTableConditions() {
         workoutTable.setRowSelectionAllowed(false);
         workoutTable.setFocusable(false);
@@ -115,6 +123,7 @@ public class ViewAllByDay extends JFrame {
         workoutTable.setRowHeight(23);
     }
 
+    // EFFECTS: adds the Meals list that prints onto the View All By Day window
     private void makeMealsListOnPanel() {
         mealsTableModel = new DefaultTableModel();
         mealTable = new JTable(mealsTableModel) {
@@ -134,6 +143,7 @@ public class ViewAllByDay extends JFrame {
         listsPanel.add(new JScrollPane(mealTable), BorderLayout.CENTER);
     }
 
+    // EFFECTS: makes the Meals list that can be printed onto the View All By Day window
     private void makeMealsList() {
         mealsTableModel.addRow(new Object[]{"All Meals By Day: "});
         for (String day : getDays()) {
@@ -159,6 +169,7 @@ public class ViewAllByDay extends JFrame {
         }
     }
 
+    // EFFECTS: sets the conditions for the Meals list to printout correctly
     private void mealsTableConditions() {
         mealTable.setRowSelectionAllowed(false);
         mealTable.setFocusable(false);
@@ -168,6 +179,7 @@ public class ViewAllByDay extends JFrame {
 
 
 
+    // EFFECTS: makes a list with 7 days of the week
     private void makeDays() {
         days.add("Monday");
         days.add("Tuesday");
@@ -179,12 +191,14 @@ public class ViewAllByDay extends JFrame {
     }
 
 
+    // EFFECTS: returns a list of days in a week
     private ArrayList<String> getDays() {
         return days;
     }
 
 
 
+    // EFFECTS: adds all the buttons to the View All By Day window
     private void makeButtonsOnPanel() {
         buttonsPanel = new JPanel();
 //        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
@@ -201,6 +215,7 @@ public class ViewAllByDay extends JFrame {
     }
 
 
+    // EFFECTS: creates Done Button that can be added to the View All By Day Window
     private JButton doneButton() {
         JButton doneButton = new JButton("Done");
         doneButton.setCursor(handCursor);

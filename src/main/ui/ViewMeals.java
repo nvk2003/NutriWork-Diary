@@ -9,6 +9,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+// Represents a View Meals Window to the user
 public class ViewMeals extends JFrame {
     private static final int WIDTH = 800;
     private static final int HEIGHT = 450;
@@ -19,6 +20,7 @@ public class ViewMeals extends JFrame {
     private DefaultTableModel mealsTableModel;
     private int serialNo = 1;
 
+    // EFFECTS: constructs the GUI for the View Meals Window
     public ViewMeals(ListsMaker workoutsAndMeals) {
         super("View Meals");
 
@@ -28,6 +30,7 @@ public class ViewMeals extends JFrame {
         setVisible(true);
     }
 
+    // EFFECTS: creates the main window for the View Meals
     private void mainWindow() {
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
         setMinimumSize(new Dimension(WIDTH, HEIGHT));
@@ -41,6 +44,7 @@ public class ViewMeals extends JFrame {
         arrangeOnMainWindow();
     }
 
+    // EFFECTS: arranges the buttons and list of meals onto the window
     private void arrangeOnMainWindow() {
         panel = new JPanel();
         add(panel);
@@ -51,6 +55,7 @@ public class ViewMeals extends JFrame {
         makeButtonsOnPanel();
     }
 
+    // EFFECTS: makes the list of meals that can be printed onto the window
     private void makeListsOnPanel() {
         mealsTableModel = new DefaultTableModel();
         mealTable = new JTable(mealsTableModel) {
@@ -80,6 +85,7 @@ public class ViewMeals extends JFrame {
         panel.add(new JScrollPane(mealTable), BorderLayout.CENTER);
     }
 
+    // EFFECTS: sets the conditions for the list of meals to be printed onto the window
     private void mealsTableConditions() {
         mealTable.setRowSelectionAllowed(false);
         mealTable.setFocusable(false);
@@ -87,6 +93,7 @@ public class ViewMeals extends JFrame {
         mealTable.setRowHeight(23);
     }
 
+    // EFFECTS: adds the buttons onto the window
     private void makeButtonsOnPanel() {
         JPanel buttonPanel = new JPanel();
 //        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
@@ -107,6 +114,7 @@ public class ViewMeals extends JFrame {
     }
 
 
+    // EFFECTS: creates a Done Button that can be added onto the window
     private JButton doneButton() {
         JButton doneButton = new JButton("Done");
         doneButton.setCursor(handCursor);
@@ -123,6 +131,8 @@ public class ViewMeals extends JFrame {
         return doneButton;
     }
 
+    // EFFECTS: creates a View Meals By Day button that can be
+    //          used for the user to view the meals of a week separated by day
     private JButton viewMealsByDayButton() {
         JButton viewMealsByDayButton = new JButton("View Meals By Day");
         viewMealsByDayButton.setCursor(handCursor);

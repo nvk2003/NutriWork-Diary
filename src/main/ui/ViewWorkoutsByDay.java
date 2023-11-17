@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+// Represents a View Workouts By Day window to the user
 public class ViewWorkoutsByDay extends JFrame {
     private static final int WIDTH = 800;
     private static final int HEIGHT = 450;
@@ -21,6 +22,7 @@ public class ViewWorkoutsByDay extends JFrame {
 
     private ArrayList<String> days = new ArrayList<>();
 
+    // EFFECTS: constructs a GUI for the View Workouts By Day window
     public ViewWorkoutsByDay(ListsMaker workoutsAndMeals) {
         super("View Workouts By Day");
 
@@ -31,6 +33,7 @@ public class ViewWorkoutsByDay extends JFrame {
         setVisible(true);
     }
 
+    // EFFECTS: creates the main window for viewing the workouts by day
     private void mainWindow() {
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
         setMinimumSize(new Dimension(WIDTH, HEIGHT));
@@ -44,6 +47,7 @@ public class ViewWorkoutsByDay extends JFrame {
         arrangeOnMainWindow();
     }
 
+    // EFFECTS: arranges the list of workouts by day onto the main window
     private void arrangeOnMainWindow() {
         panel = new JPanel();
         add(panel);
@@ -54,7 +58,7 @@ public class ViewWorkoutsByDay extends JFrame {
         makeButtonsOnPanel();
     }
 
-
+    // EFFECTS: arranges the list of workouts by day onto the window correctly
     private void makeListsOnPanel() {
         workoutTableModel = new DefaultTableModel();
         workoutTable = new JTable(workoutTableModel) {
@@ -74,6 +78,7 @@ public class ViewWorkoutsByDay extends JFrame {
         panel.add(new JScrollPane(workoutTable), BorderLayout.CENTER);
     }
 
+    // EFFECTS: makes the list of workouts by day that can be printed onto the window
     private void makeList() {
         workoutTableModel.addRow(new Object[]{"All Workouts By Day: "});
         for (String day : getDays()) {
@@ -98,6 +103,7 @@ public class ViewWorkoutsByDay extends JFrame {
         }
     }
 
+    // EFFECTS: makes a list of days in a week
     private void makeDays() {
         days.add("Monday");
         days.add("Tuesday");
@@ -108,11 +114,13 @@ public class ViewWorkoutsByDay extends JFrame {
         days.add("Sunday");
     }
 
-
+    // EFFECTS: returns the list of days of a week
     private ArrayList<String> getDays() {
         return days;
     }
 
+    // EFFECTS: sets the conditions for the table
+    //          to print out the list of workouts by day correctly
     private void workoutTableConditions() {
         workoutTable.setRowSelectionAllowed(false);
         workoutTable.setFocusable(false);
@@ -120,6 +128,7 @@ public class ViewWorkoutsByDay extends JFrame {
         workoutTable.setRowHeight(23);
     }
 
+    // EFFECTS: adds all the buttons onto the window
     private void makeButtonsOnPanel() {
         JPanel buttonPanel = new JPanel();
 //        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
@@ -140,6 +149,7 @@ public class ViewWorkoutsByDay extends JFrame {
     }
 
 
+    // EFFECTS: creates the Done Button that can be added onto the window
     private JButton doneButton() {
         JButton doneButton = new JButton("Done");
         doneButton.setCursor(handCursor);
@@ -156,6 +166,9 @@ public class ViewWorkoutsByDay extends JFrame {
         return doneButton;
     }
 
+
+    // EFFECTS: creates the View Workouts button that can be
+    //          used by the user to view the list of workouts all at once
     private JButton viewWorkoutsButton() {
         JButton viewWorkoutsButton = new JButton("View Workouts");
         viewWorkoutsButton.setCursor(handCursor);
