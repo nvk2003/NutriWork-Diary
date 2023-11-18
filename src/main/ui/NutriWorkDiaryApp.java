@@ -5,6 +5,7 @@ import persistence.JsonReader;
 import persistence.JsonWriter;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -52,7 +53,19 @@ public class NutriWorkDiaryApp {
         frame.getContentPane().setLayout(null);
         frame.getContentPane().setBackground(Color.white);
 
+        ImageIcon icon = new ImageIcon("./data/Images/Logo.png");
+        Image image = icon.getImage();
+        Image resizeImage = image.getScaledInstance(400, 400, Image.SCALE_SMOOTH);
+        icon = new ImageIcon(resizeImage);
+
+
+        JLabel logo = new JLabel("");
+        logo.setIcon(icon);
+        logo.setBounds(210, -160, 500, 400);
+        frame.getContentPane().add(logo);
         allButtons();
+
+
     }
 
     // EFFECTS: adds all the buttons to the main window
@@ -70,9 +83,10 @@ public class NutriWorkDiaryApp {
     // EFFECTS: adds the Add Button onto the main window
     private void addButton() {
         JButton addButton = new JButton("Add");
-        addButton.setBounds(200, 100, 120, 50);
+        addButton.setBounds(200, 100, 120, 50); // y = 100 or 310
         frame.getContentPane().add(addButton);
         addButton.setCursor(handCursor);
+//        addButton.setBorder(BorderFactory.createEmptyBorder());
 
         addButton.addActionListener(new ActionListener() {
             @Override
@@ -151,10 +165,10 @@ public class NutriWorkDiaryApp {
     // EFFECTS: adds the Remove Button onto the main window
     private void removeButton() {
         JButton removeButton = new JButton("Remove");
-        removeButton.setBounds(360, 100, 120, 50);
+        removeButton.setBounds(360, 100, 120, 50); // y == 100 or 310
         frame.getContentPane().add(removeButton);
         removeButton.setCursor(handCursor);
-//        removeButton.setVisible(true);
+//        removeButton.setBorder(BorderFactory.createEmptyBorder());
 
 
         removeButton.addActionListener(new ActionListener() {
@@ -236,9 +250,10 @@ public class NutriWorkDiaryApp {
     //          to view Workouts and meals
     private void viewButton() {
         JButton viewButton = new JButton("View");
-        viewButton.setBounds(520, 100, 120, 50);
+        viewButton.setBounds(520, 100, 120, 50); // y == 100 or 310
         frame.getContentPane().add(viewButton);
         viewButton.setCursor(handCursor);
+//        viewButton.setBorder(BorderFactory.createEmptyBorder());
 
         viewButton.addActionListener(new ActionListener() {
             @Override
@@ -308,6 +323,7 @@ public class NutriWorkDiaryApp {
 //                viewMeal.setVisible(true);
         choose.add(viewMeal);
 
+
         viewMeal.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -327,6 +343,7 @@ public class NutriWorkDiaryApp {
         viewAllButton.setBounds(280, 170, 120, 50);
         frame.getContentPane().add(viewAllButton);
         viewAllButton.setCursor(handCursor);
+//        viewAllButton.setBorder(BorderFactory.createEmptyBorder());
 
         viewAllButton.addActionListener(new ActionListener() {
             @Override
@@ -347,6 +364,7 @@ public class NutriWorkDiaryApp {
         viewAllByDayButton.setBounds(440, 170, 120, 50);
         frame.getContentPane().add(viewAllByDayButton);
         viewAllByDayButton.setCursor(handCursor);
+//        viewAllByDayButton.setBorder(BorderFactory.createEmptyBorder());
 
         viewAllByDayButton.addActionListener(new ActionListener() {
             @Override
@@ -369,6 +387,8 @@ public class NutriWorkDiaryApp {
         loadButton.setBounds(280, 240, 120, 50);
         frame.getContentPane().add(loadButton);
         loadButton.setCursor(handCursor);
+//        loadButton.setBorder(BorderFactory.createEmptyBorder());
+
 
         loadButton.addActionListener(new ActionListener() {
             @Override
@@ -391,6 +411,7 @@ public class NutriWorkDiaryApp {
         saveButton.setBounds(440, 240, 120, 50);
         frame.getContentPane().add(saveButton);
         saveButton.setCursor(handCursor);
+//        saveButton.setBorder(BorderFactory.createEmptyBorder());
 
         saveButton.addActionListener(new ActionListener() {
             @Override
@@ -414,9 +435,10 @@ public class NutriWorkDiaryApp {
     //          to quit the application
     private void quitButton() {
         JButton quitButton = new JButton("Quit");
-        quitButton.setBounds(360, 310, 120, 50);
+        quitButton.setBounds(360, 310, 120, 50); // y == 310 or 100
         frame.getContentPane().add(quitButton);
         quitButton.setCursor(handCursor);
+//        quitButton.setBorder(BorderFactory.createEmptyBorder());
 
         quitButton.addActionListener(new ActionListener() {
             @Override
