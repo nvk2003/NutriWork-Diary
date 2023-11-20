@@ -61,9 +61,12 @@ public class NutriWorkDiaryApp {
 
         JLabel logo = new JLabel("");
         logo.setIcon(icon);
-        logo.setBounds(210, -160, 500, 400);
-        frame.getContentPane().add(logo);
+        logo.setBounds(210, -160, 400, 400);
+
+
+
         allButtons();
+        frame.getContentPane().add(logo);
 
 
     }

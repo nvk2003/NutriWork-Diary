@@ -210,7 +210,15 @@ public class AddWorkout extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 getDay();
-                errorMsgs();
+                try {
+                    Double.parseDouble(sets.getText().strip());
+                    Double.parseDouble(reps.getText().strip());
+                    errorMsgs();
+                } catch (NumberFormatException a) {
+                    JOptionPane.showMessageDialog(null,
+                            "Please Enter Valid Input For Sets/Reps");
+                }
+
             }
         });
     }
