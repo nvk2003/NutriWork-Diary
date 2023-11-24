@@ -130,12 +130,14 @@ public class RemoveMeal extends JFrame {
     private JTextField removeTextField() {
         remove = new JTextField(" Enter S.No");
         remove.setForeground(Color.lightGray);
+        remove.setBackground(Color.white);
         remove.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent event) {
                 if (remove.getText().equals(" Enter S.No")) {
                     remove.setText("");
                     remove.setForeground(Color.black);
+                    remove.setBackground(Color.white);
                 }
             }
 
@@ -193,33 +195,51 @@ public class RemoveMeal extends JFrame {
     //          to make sure the user inputs the correct data
     private void printErrorMsgs() {
         if (remove.getText().strip().equals("Enter S.No")
-                || (Double.parseDouble(remove.getText().strip()) % 1 != 0)
-                || (remove.getText().strip().equals("0"))
-                || (Double.parseDouble(remove.getText().strip()) > workouts.size())) {
-            JOptionPane.showMessageDialog(null, "Please Enter A Valid S.No");
-        } else {
-            printChangedMeals();
+//                || (Double.parseDouble(remove.getText().strip()) % 1 != 0)
+                || (remove.getText().strip().equals("0"))) {
+//                || (Double.parseDouble(remove.getText().strip()) > workouts.size())) {
+            textBoxError(remove);
+//            JOptionPane.showMessageDialog(null, "Please Enter A Valid S.No");
+        } else if (!remove.getText().strip().equals("Enter S.No")) {
+            try {
+                Integer.parseInt(remove.getText());
+
+                if (Double.parseDouble(remove.getText().strip()) % 1 != 0
+                        || Double.parseDouble(remove.getText().strip()) > workouts.size()) {
+                    textBoxError(remove);
+                } else {
+                    printChangedMeals();
+                }
+            } catch (Exception e) {
+                textBoxError(remove);
+            }
         }
+
+
+//        else {
+//            printChangedMeals();
+//        }
     }
 
     // EFFECTS: makes a new window after removing one meal
     //          to make sure the numbering is correct on the list of meals
     private void printChangedMeals() {
-        try {
-            int rowNum = Integer.parseInt(remove.getText());
-            if (rowNum > 0) {
-                if (workouts.contains(mealTableModel.getValueAt(rowNum, 0))) {
-                    workoutsAndMeals.removeMeal(workoutsAndMeals.getMeals().get(rowNum - 1));
-                    mealTableModel.removeRow(rowNum);
-                    dispose();
-                    if (!isVisible()) {
-                        new RemoveMeal(workoutsAndMeals);
-                    }
+//        try {
+        int rowNum = Integer.parseInt(remove.getText());
+        if (rowNum > 0) {
+            if (workouts.contains(mealTableModel.getValueAt(rowNum, 0))) {
+                workoutsAndMeals.removeMeal(workoutsAndMeals.getMeals().get(rowNum - 1));
+                mealTableModel.removeRow(rowNum);
+                dispose();
+                if (!isVisible()) {
+                    new RemoveMeal(workoutsAndMeals);
                 }
             }
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Please Enter Valid S.No");
         }
+//        } catch (NumberFormatException e) {
+//            JOptionPane.showMessageDialog(null, "Please Enter Valid S.No");
+//        }
+
     }
 
     // EFFECTS: adds a Remove All button onto the window to remove all the meals
@@ -249,5 +269,14 @@ public class RemoveMeal extends JFrame {
         return removeButton;
     }
 
+
+    // MODIFIES: this
+    // EFFECTS: if there are any errors in the TextFields,
+    //          then changes the textField colour to RED
+    public void textBoxError(JTextField textField) {
+        textField.setBackground(Color.decode("#E5AAAA"));
+        textField.setForeground(Color.black);
+//        textField.setForeground(Color.RED);
+    }
 
 }

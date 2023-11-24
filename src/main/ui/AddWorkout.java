@@ -90,12 +90,15 @@ public class AddWorkout extends JFrame {
         name = new JTextField(" Enter Workout Name");
         name.setForeground(Color.lightGray);
         name.setBounds(110, 60, 165, 25);
+        name.setBackground(Color.white);
+
         name.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent event) {
                 if (name.getText().equals(" Enter Workout Name")) {
                     name.setText("");
                     name.setForeground(Color.black);
+                    name.setBackground(Color.white);
                 }
             }
 
@@ -116,12 +119,15 @@ public class AddWorkout extends JFrame {
         sets = new JTextField(" Enter No. of Sets");
         sets.setForeground(Color.lightGray);
         sets.setBounds(110, 120, 165, 25);
+        sets.setBackground(Color.white);
+
         sets.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent event) {
                 if (sets.getText().equals(" Enter No. of Sets")) {
                     sets.setText("");
                     sets.setForeground(Color.black);
+                    sets.setBackground(Color.white);
                 }
             }
 
@@ -142,12 +148,15 @@ public class AddWorkout extends JFrame {
         reps = new JTextField(" Enter No. of Reps");
         reps.setForeground(Color.lightGray);
         reps.setBounds(110, 180, 165, 25);
+        reps.setBackground(Color.white);
+
         reps.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent event) {
                 if (reps.getText().equals(" Enter No. of Reps")) {
                     reps.setText("");
                     reps.setForeground(Color.black);
+                    reps.setBackground(Color.white);
                 }
             }
 
@@ -169,12 +178,15 @@ public class AddWorkout extends JFrame {
         day = new JTextField(" Enter Day of the Week");
         day.setForeground(Color.lightGray);
         day.setBounds(110, 240, 165, 25);
+        day.setBackground(Color.white);
+
         day.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent event) {
                 if (day.getText().equals(" Enter Day of the Week")) {
                     day.setText("");
                     day.setForeground(Color.black);
+                    day.setBackground(Color.white);
                 }
             }
 
@@ -210,14 +222,26 @@ public class AddWorkout extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 getDay();
-                try {
-                    Double.parseDouble(sets.getText().strip());
-                    Double.parseDouble(reps.getText().strip());
-                    errorMsgs();
-                } catch (NumberFormatException a) {
-                    JOptionPane.showMessageDialog(null,
-                            "Please Enter Valid Input For Sets/Reps");
+                errorMsgs();
+                if (errorMsgs()) {
+                    makeWorkout();
+                    textsBackToNormal();
+
+                    if (workoutsAndMeals.getWorkouts().size() != 0) {
+                        cancelButton.setVisible(false);
+                        doneButton();
+                    }
                 }
+
+
+//                try {
+//                    Double.parseDouble(sets.getText().strip());
+//                    Double.parseDouble(reps.getText().strip());
+//                    errorMsgs();
+//                } catch (NumberFormatException a) {
+//                    JOptionPane.showMessageDialog(null,
+//                            "Please Enter Valid Input For Sets/Reps");
+//                }
 
             }
         });
@@ -225,28 +249,157 @@ public class AddWorkout extends JFrame {
 
 
     // EFFECTS: gives the error messages to the user to insert the correct details
-    private void errorMsgs() {
+    private boolean errorMsgs() {
+        nameErrorMsg();
+        setsErrorMsg();
+        repsErrorMsg();
+        dayErrorMsg();
+
+        return nameErrorMsg() && setsErrorMsg() && repsErrorMsg() && dayErrorMsg();
+
+
+
+//        if (name.getText().strip().equals("Enter Workout Name")) {
+//            JOptionPane.showMessageDialog(null, "Please Enter Workout Name");
+//        } else if (sets.getText().strip().equals("Enter No. of Sets")
+//                || (Double.parseDouble(sets.getText().strip()) % 1 != 0)
+//                || (sets.getText().strip().equals("0"))) {
+//            JOptionPane.showMessageDialog(null, "Please Enter Valid No. Of Sets");
+//        } else if (reps.getText().strip().equals("Enter No. of Reps")
+//                || (Double.parseDouble(reps.getText().strip()) % 1 != 0)
+//                || (reps.getText().strip().equals("0"))) {
+//            JOptionPane.showMessageDialog(null, "Please Enter Valid No. Of Reps");
+//        } else if (day.getText().strip().equals("Enter Day of the Week")
+//                || (days.equals(day.getText().toLowerCase()))) {
+//            JOptionPane.showMessageDialog(null, "Please Enter A Valid Day of the Week");
+//        } else {
+////            elseMethods();
+//            try {
+//                Integer.parseInt(sets.getText().strip());
+//                Integer.parseInt(reps.getText().strip());
+//                makeWorkout();
+//                textsBackToNormal();
+//
+//                if (workoutsAndMeals.getWorkouts().size() != 0) {
+//                    cancelButton.setVisible(false);
+//                    doneButton();
+//                }
+//            } catch (NumberFormatException e) {
+//                JOptionPane.showMessageDialog(null, "Please Enter Valid Input For Sets/Reps");
+//            }
+////            for (Workout w : workoutsAndMeals.getWorkouts()) {
+////                System.out.println(w.getWorkout());
+////                System.out.println(w.getDay());
+////            }
+//        }
+    }
+
+
+    // EFFECTS: makes the name textField Red if there is any error
+    public boolean nameErrorMsg() {
         if (name.getText().strip().equals("Enter Workout Name")) {
-            JOptionPane.showMessageDialog(null, "Please Enter Workout Name");
+            textBoxError(name);
+            return false;
+        } else {
+            name.setBackground(Color.white);
+            return true;
+        }
+    }
+
+
+    // EFFECTS: makes the sets textField Red if there is any error
+    public boolean setsErrorMsg() {
+        if (!sets.getText().strip().equals("Enter No. of Sets")) {
+            try {
+                Double.parseDouble(sets.getText().strip());
+                Integer.parseInt(sets.getText().strip());
+                sets.setBackground(Color.white);
+                return true;
+            } catch (Exception e) {
+                textBoxError(sets);
+                return false;
+            }
         } else if (sets.getText().strip().equals("Enter No. of Sets")
                 || (Double.parseDouble(sets.getText().strip()) % 1 != 0)
                 || (sets.getText().strip().equals("0"))) {
-            JOptionPane.showMessageDialog(null, "Please Enter Valid No. Of Sets");
+            textBoxError(sets);
+            return false;
+        } else {
+            sets.setBackground(Color.white);
+            return true;
+        }
+    }
+
+    // makes the reps textField RED if there is any error
+    public boolean repsErrorMsg() {
+        if (!reps.getText().strip().equals("Enter No. of Reps")) {
+            try {
+                Double.parseDouble((reps.getText().strip()));
+                Integer.parseInt(reps.getText().strip());
+                reps.setBackground(Color.white);
+                return true;
+            } catch (Exception e) {
+                textBoxError(reps);
+                return false;
+            }
         } else if (reps.getText().strip().equals("Enter No. of Reps")
                 || (Double.parseDouble(reps.getText().strip()) % 1 != 0)
                 || (reps.getText().strip().equals("0"))) {
-            JOptionPane.showMessageDialog(null, "Please Enter Valid No. Of Reps");
-        } else if (day.getText().strip().equals("Enter Day of the Week")
-                || (days.equals(day.getText().toLowerCase()))) {
-            JOptionPane.showMessageDialog(null, "Please Enter A Valid Day of the Week");
+            textBoxError(reps);
+            return false;
         } else {
-            elseMethods();
-//            for (Workout w : workoutsAndMeals.getWorkouts()) {
-//                System.out.println(w.getWorkout());
-//                System.out.println(w.getDay());
-//            }
+            reps.setBackground(Color.white);
+            return true;
         }
     }
+
+
+    // EFFECTS: makes the day textField Red if there is any error
+    public boolean dayErrorMsg() {
+        if (day.getText().strip().equals("Enter Day of the Week")
+                || (days.equals(day.getText().strip().toLowerCase()))) {
+            textBoxError(day);
+            return false;
+        } else {
+            day.setBackground(Color.white);
+            return true;
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // MODIFIES: this
+    // EFFECTS: if there are any errors in the TextFields,
+    //          then changes the textField colour to RED
+    public void textBoxError(JTextField textField) {
+        textField.setBackground(Color.decode("#E5AAAA"));
+        textField.setForeground(Color.black);
+//        textField.setForeground(Color.RED);
+
+    }
+
+
 
     // EFFECTS: gives the error messages for the sets and reps
     //          to make sure the user inputs the correct data
@@ -265,6 +418,33 @@ public class AddWorkout extends JFrame {
             JOptionPane.showMessageDialog(null, "Please Enter Valid Input For Sets/Reps");
         }
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     // EFFECTS: adds the done button to the window
     private void doneButton() {

@@ -23,6 +23,12 @@
             "sets": 5,
             "name": "Pullups",
             "day": "Sunday"
+        },
+        {
+            "reps": 5,
+            "sets": 6,
+            "name": "Jumps",
+            "day": "Thursday"
         }
     ],
     "name": "Workouts and Meals",
@@ -50,6 +56,12 @@
             "name": "Chicken Rice",
             "calories": 380,
             "day": "Tuesday"
+        },
+        {
+            "mealTime": "Lunch",
+            "name": "Soup",
+            "calories": 120.239,
+            "day": "Wednesday"
         }
     ]
 }

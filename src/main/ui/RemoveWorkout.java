@@ -143,6 +143,7 @@ public class RemoveWorkout extends JFrame {
     private JTextField removeTextField() {
         remove = new JTextField(" Enter S.No");
         remove.setForeground(Color.lightGray);
+        remove.setBackground(Color.white);
 //        remove.setBounds(110, 60, 165, 25);
         remove.addFocusListener(new FocusListener() {
             @Override
@@ -150,6 +151,7 @@ public class RemoveWorkout extends JFrame {
                 if (remove.getText().equals(" Enter S.No")) {
                     remove.setText("");
                     remove.setForeground(Color.black);
+                    remove.setBackground(Color.white);
                 }
             }
 
@@ -202,40 +204,55 @@ public class RemoveWorkout extends JFrame {
         return removeButton;
     }
 
-    // EFFECTS: prints out the error messages on the window
+    // EFFECTS: shows the error messages on the window
     //          to make sure the user inputs the correct data
     private void printErrorMsgs() {
         if (remove.getText().strip().equals("Enter S.No")
-                || (Double.parseDouble(remove.getText().strip()) % 1 != 0)
+//                || (Double.parseDouble(remove.getText().strip()) % 1 != 0)
                 || (remove.getText().strip().equals("0"))
-                || (Double.parseDouble(remove.getText().strip()) > workouts.size())) {
-            JOptionPane.showMessageDialog(null, "Please Enter A Valid S.No");
-        } else {
-            printChangedWorkouts();
+//                || (Double.parseDouble(remove.getText().strip()) > workouts.size())
+        ) {
+            textBoxError(remove);
+//            JOptionPane.showMessageDialog(null, "Please Enter A Valid S.No");
+        } else if (!remove.getText().strip().equals("Enter S.No")) {
+            try {
+                Integer.parseInt(remove.getText());
+
+                if (Double.parseDouble(remove.getText().strip()) % 1 != 0
+                        || Double.parseDouble(remove.getText().strip()) > workouts.size()) {
+                    textBoxError(remove);
+                } else {
+                    printChangedWorkouts();
+                }
+            } catch (Exception e) {
+                textBoxError(remove);
+            }
         }
+//        else {
+//            printChangedWorkouts();
+//        }
     }
 
     // EFFECTS: makes a new window after removing one Workout
     //          to make sure the numbering is correct on the list of workouts
     private void printChangedWorkouts() {
-        try {
+//        try {
+        int rowNum = Integer.parseInt(remove.getText());
 
-
-            int rowNum = Integer.parseInt(remove.getText());
-
-            if (rowNum > 0) {
-                if (workouts.contains(workoutTableModel.getValueAt(rowNum, 0))) {
-                    workoutsAndMeals.removeWorkout(workoutsAndMeals.getWorkouts().get(rowNum - 1));
-                    workoutTableModel.removeRow(rowNum);
-                    dispose();
-                    if (!isVisible()) {
-                        new RemoveWorkout(workoutsAndMeals);
-                    }
+        if (rowNum > 0) {
+            if (workouts.contains(workoutTableModel.getValueAt(rowNum, 0))) {
+                workoutsAndMeals.removeWorkout(workoutsAndMeals.getWorkouts().get(rowNum - 1));
+                workoutTableModel.removeRow(rowNum);
+                dispose();
+                if (!isVisible()) {
+                    new RemoveWorkout(workoutsAndMeals);
                 }
             }
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Please Enter Valid S.No");
         }
+//        } catch (NumberFormatException e) {
+//            textBoxError(remove);
+////            JOptionPane.showMessageDialog(null, "Please Enter Valid S.No");
+//        }
     }
 
     // EFFECTS: adds a Remove All button onto the window to remove all the workouts
@@ -262,5 +279,16 @@ public class RemoveWorkout extends JFrame {
         });
 
         return removeButton;
+    }
+
+
+    // MODIFIES: this
+    // EFFECTS: if there are any errors in the TextFields,
+    //          then changes the textField colour to RED
+    public void textBoxError(JTextField textField) {
+        textField.setBackground(Color.decode("#E5AAAA"));
+        textField.setForeground(Color.black);
+//        textField.setForeground(Color.RED);
+
     }
 }

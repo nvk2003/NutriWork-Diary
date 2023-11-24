@@ -100,12 +100,15 @@ public class AddMeal extends JFrame {
         name = new JTextField(" Enter Meal Name");
         name.setForeground(Color.lightGray);
         name.setBounds(125, 60, 165, 25);
+        name.setBackground(Color.white);
+
         name.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent event) {
                 if (name.getText().equals(" Enter Meal Name")) {
                     name.setText("");
                     name.setForeground(Color.black);
+                    name.setBackground(Color.white);
                 }
             }
 
@@ -126,12 +129,14 @@ public class AddMeal extends JFrame {
         calories = new JTextField(" Enter No. of Calories");
         calories.setForeground(Color.lightGray);
         calories.setBounds(125, 120, 165, 25);
+        calories.setBackground(Color.white);
         calories.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent event) {
                 if (calories.getText().equals(" Enter No. of Calories")) {
                     calories.setText("");
                     calories.setForeground(Color.black);
+                    calories.setBackground(Color.white);
                 }
             }
 
@@ -153,12 +158,14 @@ public class AddMeal extends JFrame {
         mealTime = new JTextField(" Enter Meal Time");
         mealTime.setForeground(Color.lightGray);
         mealTime.setBounds(125, 180, 165, 25);
+        mealTime.setBackground(Color.white);
         mealTime.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent event) {
                 if (mealTime.getText().equals(" Enter Meal Time")) {
                     mealTime.setText("");
                     mealTime.setForeground(Color.black);
+                    mealTime.setBackground(Color.white);
                 }
             }
 
@@ -180,12 +187,14 @@ public class AddMeal extends JFrame {
         day = new JTextField(" Enter Day of the Week");
         day.setForeground(Color.lightGray);
         day.setBounds(125, 240, 165, 25);
+        day.setBackground(Color.white);
         day.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent event) {
                 if (day.getText().equals(" Enter Day of the Week")) {
                     day.setText("");
                     day.setForeground(Color.black);
+                    day.setBackground(Color.white);
                 }
             }
 
@@ -220,39 +229,134 @@ public class AddMeal extends JFrame {
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                getDay();
-                getMealTime();
-                errorMsgs();
-            }
+                    getDay();
+                    getMealTime();
+                    errorMsgs();
+                    if (errorMsgs()) {
+                        makeMeal();
+                        textsBackToNormal();
+
+                        if (workoutsAndMeals.getMeals().size() != 0) {
+                            cancelButton.setVisible(false);
+                            doneButton();
+                        }
+                    }
+                }
         });
     }
 
-    // EFFECTS: gives the error messages to the user to insert the correct details
-    private void errorMsgs() {
+    // EFFECTS: shows the error messages to the user to insert the correct details
+    private boolean errorMsgs() {
+        nameErrorMsg();
+        caloriesErrorMsg();
+        mealTimeErrorMsg();
+        dayErrorMsg();
+
+        return nameErrorMsg() && caloriesErrorMsg() && mealTimeErrorMsg() && dayErrorMsg();
+
+
+//        if (name.getText().strip().equals("Enter Meal Name")) {
+////            textBoxError(name);
+//            JOptionPane.showMessageDialog(null, "Please Enter Meal Name");
+//        } else if (calories.getText().strip().equals("Enter No. of Calories")) {
+////            textBoxError(calories);
+//            JOptionPane.showMessageDialog(null, "Please Enter Valid No. Of Calories");
+//        } else if (mealTime.getText().strip().equals("Enter Meal Time")
+//                || (mealTimes.equals(mealTime.getText().strip().toLowerCase()))) {
+////            textBoxError(mealTime);
+//            JOptionPane.showMessageDialog(null, "Please Enter Valid Meal Time");
+//        } else if (day.getText().strip().equals("Enter Day of the Week")
+//                || (days.equals(day.getText().strip().toLowerCase()))) {
+////            textBoxError(day);
+//            JOptionPane.showMessageDialog(null, "Please Enter A Valid Day of the Week");
+//        } else if (!calories.getText().strip().equals("Enter No. of Calories")) {
+//            try {
+//                Double.parseDouble(calories.getText());
+//                makeMeal();
+//                textsBackToNormal();
+//
+//                if (workoutsAndMeals.getMeals().size() != 0) {
+//                    cancelButton.setVisible(false);
+//                    doneButton();
+//                }
+//            } catch (Exception e) {
+////                textBoxError(calories);
+//                JOptionPane.showMessageDialog(null, "Please Enter Valid No. Of Calories");
+//            }
+//        }
+
+
+
+    }
+
+
+    // EFFECTS: makes the name textField Red if there is any error
+    public boolean nameErrorMsg() {
         if (name.getText().strip().equals("Enter Meal Name")) {
-            JOptionPane.showMessageDialog(null, "Please Enter Meal Name");
-        } else if (calories.getText().strip().equals("Enter No. of Calories")) {
-            JOptionPane.showMessageDialog(null, "Please Enter Valid No. Of Calories");
-        } else if (mealTime.getText().strip().equals("Enter Meal Time")
-                || (mealTimes.equals(mealTime.getText().strip().toLowerCase()))) {
-            JOptionPane.showMessageDialog(null, "Please Enter Valid Meal Time");
-        } else if (day.getText().strip().equals("Enter Day of the Week")
-                || (days.equals(day.getText().strip().toLowerCase()))) {
-            JOptionPane.showMessageDialog(null, "Please Enter A Valid Day of the Week");
+            textBoxError(name);
+            return false;
+        } else {
+            name.setBackground(Color.white);
+            return true;
+        }
+    }
+
+    // EFFECTS: makes the calories textField Red if there is any error
+    public boolean caloriesErrorMsg() {
+        if (calories.getText().strip().equals("Enter No. of Calories")) {
+            textBoxError(calories);
+            return false;
         } else if (!calories.getText().strip().equals("Enter No. of Calories")) {
             try {
                 Double.parseDouble(calories.getText());
-                makeMeal();
-                textsBackToNormal();
-
-                if (workoutsAndMeals.getMeals().size() != 0) {
-                    cancelButton.setVisible(false);
-                    doneButton();
-                }
+                calories.setBackground(Color.white);
+                return true;
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Please Enter Valid No. Of Calories");
+                textBoxError(calories);
+                return false;
             }
+        } else {
+            calories.setBackground(Color.white);
+            return true;
         }
+    }
+
+    // EFFECTS: makes the mealTime textField Red if there is any error
+    public boolean mealTimeErrorMsg() {
+        if (mealTime.getText().strip().equals("Enter Meal Time")
+                || (mealTimes.equals(mealTime.getText().strip().toLowerCase()))) {
+            textBoxError(mealTime);
+            return false;
+        } else {
+            mealTime.setBackground(Color.white);
+            return true;
+        }
+    }
+
+    // EFFECTS: makes the day textField Red if there is any error
+    public boolean dayErrorMsg() {
+        if (day.getText().strip().equals("Enter Day of the Week")
+                || (days.equals(day.getText().strip().toLowerCase()))) {
+            textBoxError(day);
+            return false;
+        } else {
+            day.setBackground(Color.white);
+            return true;
+        }
+    }
+
+
+
+
+
+
+    // MODIFIES: this
+    // EFFECTS: if there are any errors in the TextFields,
+    //          then changes the textField colour to RED
+    public void textBoxError(JTextField textField) {
+        textField.setBackground(Color.decode("#E5AAAA"));
+        textField.setForeground(Color.black);
+//        textField.setForeground(Color.RED);
 
     }
 
@@ -293,7 +397,7 @@ public class AddMeal extends JFrame {
 
     // EFFECTS: construct a new Meal everytime the user adds a Meal
     private void makeMeal() {
-        Meal meal = new Meal(name.getText(), Double.parseDouble(calories.getText()),
+        Meal meal = new Meal(name.getText().strip(), Double.parseDouble(calories.getText().strip()),
                 mealTimes, days);
         workoutsAndMeals.addMeal(meal);
     }

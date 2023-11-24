@@ -70,7 +70,7 @@ public class ViewMeals extends JFrame {
         mealsTableModel.addColumn("");
 
         mealsTableModel.addRow(new String[]{"All Meals: \n"});
-        if (workoutsAndMeals.getWorkouts().size() == 0) {
+        if (workoutsAndMeals.getMeals().size() == 0) {
             mealsTableModel.addRow(new Object[]{"  There Are No Meals To Be Viewed !"});
         } else {
 
