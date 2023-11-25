@@ -58,6 +58,7 @@ public class RemoveMeal extends JFrame {
         panel.setBackground(Color.white);
         panel.setLayout(new BorderLayout());
 //        panel.setLayout(new GridLayout(1,2));
+        removeGif();
         makeListsOnPanel();
         makeButtonsOnPanel();
     }
@@ -277,6 +278,22 @@ public class RemoveMeal extends JFrame {
         textField.setBackground(Color.decode("#E5AAAA"));
         textField.setForeground(Color.black);
 //        textField.setForeground(Color.RED);
+    }
+
+
+
+    // EFFECTS: adds a Remove GIF onto the panel
+    private void removeGif() {
+        ImageIcon icon = new ImageIcon("./data/Images/Remove.gif");
+//        Image image = icon.getImage();
+//        Image resizeImage = image.getScaledInstance(400, 300, Image.SCALE_DEFAULT);
+//        icon = new ImageIcon(resizeImage);
+
+        JLabel removeGif = new JLabel();
+        removeGif.setIcon(icon);
+        removeGif.setBounds(410, 60, 350, 250);
+        removeGif.setVisible(true);
+        panel.add(removeGif);
     }
 
 }

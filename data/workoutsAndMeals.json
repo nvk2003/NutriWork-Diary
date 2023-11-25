@@ -1,5 +1,68 @@
 {
-    "workouts": [],
-    "name": "GUI Workouts And Meals",
-    "meals": []
+  "workouts": [
+    {
+      "reps": 10,
+      "sets": 4,
+      "name": "Squats",
+      "day": "Monday"
+    },
+    {
+      "reps": 8,
+      "sets": 5,
+      "name": "Lunges",
+      "day": "Tuesday"
+    },
+    {
+      "reps": 9,
+      "sets": 3,
+      "name": "Pushups",
+      "day": "Sunday"
+    },
+    {
+      "reps": 5,
+      "sets": 5,
+      "name": "Pullups",
+      "day": "Sunday"
+    },
+    {
+      "reps": 5,
+      "sets": 6,
+      "name": "Jumps",
+      "day": "Thursday"
+    }
+  ],
+  "name": "Workouts and Meals",
+  "meals": [
+    {
+      "mealTime": "Dinner",
+      "name": "Burger",
+      "calories": 230.1,
+      "day": "Tuesday"
+    },
+    {
+      "mealTime": "Lunch",
+      "name": "Salad",
+      "calories": 100,
+      "day": "Monday"
+    },
+    {
+      "mealTime": "Dinner",
+      "name": "Biryani",
+      "calories": 795.2,
+      "day": "Sunday"
+    },
+    {
+      "mealTime": "Lunch",
+      "name": "Chicken Rice",
+      "calories": 380,
+      "day": "Tuesday"
+    },
+    {
+      "mealTime": "Lunch",
+      "name": "Soup",
+      "calories": 120.239,
+      "day": "Wednesday"
+    }
+  ]
 }
+
