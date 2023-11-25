@@ -54,6 +54,7 @@ public class ViewMealsByDay extends JFrame {
         panel.setBackground(Color.white);
         panel.setLayout(new BorderLayout());
 //        panel.setLayout(new GridLayout(1,2));
+        viewMealsByDayGif();
         makeListsOnPanel();
         makeButtonsOnPanel();
     }
@@ -188,5 +189,20 @@ public class ViewMealsByDay extends JFrame {
 
         return viewMealsButton;
     }
+
+    // EFFECTS: creates a View Meals By Day Gif and adds it the panel
+    private void viewMealsByDayGif() {
+        ImageIcon icon = new ImageIcon("./data/Images/ViewByDay.gif");
+        Image image = icon.getImage();
+        Image resizeImage = image.getScaledInstance(300, 300, Image.SCALE_DEFAULT);
+        icon = new ImageIcon(resizeImage);
+
+        JLabel viewMealsByDayGif = new JLabel(icon);
+//        viewMealsByDayGif.setIcon(icon);
+        viewMealsByDayGif.setBounds(450, 40, 300, 300);
+        viewMealsByDayGif.setVisible(true);
+        panel.add(viewMealsByDayGif);
+    }
+
 
 }

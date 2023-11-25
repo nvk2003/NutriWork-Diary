@@ -54,6 +54,7 @@ public class ViewWorkoutsByDay extends JFrame {
         panel.setBackground(Color.white);
         panel.setLayout(new BorderLayout());
 //        panel.setLayout(new GridLayout(1,2));
+        viewWorkoutsByDayGif();
         makeListsOnPanel();
         makeButtonsOnPanel();
     }
@@ -185,5 +186,19 @@ public class ViewWorkoutsByDay extends JFrame {
         });
 
         return viewWorkoutsButton;
+    }
+
+    // EFFECTS: creates a View Workouts By Day Gif and adds it the panel
+    private void viewWorkoutsByDayGif() {
+        ImageIcon icon = new ImageIcon("./data/Images/ViewByDay.gif");
+        Image image = icon.getImage();
+        Image resizeImage = image.getScaledInstance(300, 300, Image.SCALE_DEFAULT);
+        icon = new ImageIcon(resizeImage);
+
+        JLabel viewWorkoutsByDayGif = new JLabel(icon);
+//        viewMealsByDayGif.setIcon(icon);
+        viewWorkoutsByDayGif.setBounds(450, 40, 300, 300);
+        viewWorkoutsByDayGif.setVisible(true);
+        panel.add(viewWorkoutsByDayGif);
     }
 }

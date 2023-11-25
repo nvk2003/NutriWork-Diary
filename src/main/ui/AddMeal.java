@@ -24,6 +24,9 @@ public class AddMeal extends JFrame {
     private String days;
     private String mealTimes;
     private JButton cancelButton;
+    private JLabel addMealGif;
+    private JLabel errorMealGif;
+    private JLabel casualMealGif;
 
 
     // EFFECTS: constructs the GUI for the Add Meals window
@@ -45,6 +48,18 @@ public class AddMeal extends JFrame {
         add(panel);
         panel.setLayout(null);
         panel.setBackground(Color.white);
+
+        errorMealGif = new JLabel();
+        addMealGif = new JLabel();
+        casualMealGif = new JLabel();
+        // I did the below 4 lines because if you remove this,
+        // then I need to press the Add Button for two times for the Gif to appear
+        addMealGif();
+        addMealGif.setVisible(false);
+        errorMealGif();
+        errorMealGif.setVisible(false);
+        casualMealGif();
+        casualMealGif.setVisible(true);
 
 
         addLabelsAndTextBoxes();
@@ -231,15 +246,18 @@ public class AddMeal extends JFrame {
             public void actionPerformed(ActionEvent e) {
                     getDay();
                     getMealTime();
-                    errorMsgs();
+//                    errorMsgs();
                     if (errorMsgs()) {
                         makeMeal();
                         textsBackToNormal();
+                        addMealGif();
 
                         if (workoutsAndMeals.getMeals().size() != 0) {
                             cancelButton.setVisible(false);
                             doneButton();
                         }
+                    } else {
+                        errorMealGif();
                     }
                 }
         });
@@ -291,7 +309,7 @@ public class AddMeal extends JFrame {
 
 
     // EFFECTS: makes the name textField Red if there is any error
-    public boolean nameErrorMsg() {
+    private boolean nameErrorMsg() {
         if (name.getText().strip().equals("Enter Meal Name")) {
             textBoxError(name);
             return false;
@@ -302,7 +320,7 @@ public class AddMeal extends JFrame {
     }
 
     // EFFECTS: makes the calories textField Red if there is any error
-    public boolean caloriesErrorMsg() {
+    private boolean caloriesErrorMsg() {
         if (calories.getText().strip().equals("Enter No. of Calories")) {
             textBoxError(calories);
             return false;
@@ -322,7 +340,7 @@ public class AddMeal extends JFrame {
     }
 
     // EFFECTS: makes the mealTime textField Red if there is any error
-    public boolean mealTimeErrorMsg() {
+    private boolean mealTimeErrorMsg() {
         if (mealTime.getText().strip().equals("Enter Meal Time")
                 || (mealTimes.equals(mealTime.getText().strip().toLowerCase()))) {
             textBoxError(mealTime);
@@ -334,7 +352,7 @@ public class AddMeal extends JFrame {
     }
 
     // EFFECTS: makes the day textField Red if there is any error
-    public boolean dayErrorMsg() {
+    private boolean dayErrorMsg() {
         if (day.getText().strip().equals("Enter Day of the Week")
                 || (days.equals(day.getText().strip().toLowerCase()))) {
             textBoxError(day);
@@ -346,14 +364,10 @@ public class AddMeal extends JFrame {
     }
 
 
-
-
-
-
     // MODIFIES: this
     // EFFECTS: if there are any errors in the TextFields,
     //          then changes the textField colour to RED
-    public void textBoxError(JTextField textField) {
+    private void textBoxError(JTextField textField) {
         textField.setBackground(Color.decode("#E5AAAA"));
         textField.setForeground(Color.black);
 //        textField.setForeground(Color.RED);
@@ -448,4 +462,47 @@ public class AddMeal extends JFrame {
         mealTime.setForeground(Color.lightGray);
         day.setForeground(Color.lightGray);
     }
+
+
+    // EFFECTS: adds a Confirmation GIF onto the panel
+    private void addMealGif() {
+        casualMealGif.setVisible(false);
+        errorMealGif.setVisible(false);
+        ImageIcon icon = new ImageIcon("./data/Images/AddMeal.gif");
+        Image image = icon.getImage();
+        Image resizeImage = image.getScaledInstance(300, 300, Image.SCALE_DEFAULT);
+        icon = new ImageIcon(resizeImage);
+
+        addMealGif.setIcon(icon);
+        addMealGif.setBounds(400, 60, 250, 250);
+        addMealGif.setVisible(true);
+        panel.add(addMealGif);
+    }
+
+    // EFFECTS: adds an Error GIF onto the panel
+    private void errorMealGif() {
+        casualMealGif.setVisible(false);
+        addMealGif.setVisible(false);
+        ImageIcon icon = new ImageIcon("./data/Images/ErrorMeal.gif");
+
+        errorMealGif.setIcon(icon);
+        errorMealGif.setBounds(410, 60, 250, 250);
+        errorMealGif.setVisible(true);
+        panel.add(errorMealGif);
+    }
+
+    // EFFECTS: adds a Casual GIF onto the panel
+    private void casualMealGif() {
+        ImageIcon icon = new ImageIcon("./data/Images/CasualMeal.gif");
+//        Image image = icon.getImage();
+//        Image resizeImage = image.getScaledInstance(400, 300, Image.SCALE_DEFAULT);
+//        icon = new ImageIcon(resizeImage);
+
+        casualMealGif.setIcon(icon);
+        casualMealGif.setBounds(410, 60, 250, 250);
+        casualMealGif.setVisible(true);
+        panel.add(casualMealGif);
+    }
+
+
 }

@@ -48,11 +48,24 @@ public class NutriWorkDiaryApp {
         frame = new JFrame("NutriWork Diary");
         frame.setPreferredSize(new Dimension(WIDTH, HEIGHT));
         frame.setMinimumSize(new Dimension(WIDTH, HEIGHT));
+        frame.setResizable(false);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.getContentPane().setLayout(null);
         frame.getContentPane().setBackground(Color.white);
 
+
+
+
+
+        allButtons();
+        mainLogo();
+        workoutGif();
+        mealGif();
+    }
+
+    // EFFECTS: adds the logo onto the Main Window
+    private void mainLogo() {
         ImageIcon icon = new ImageIcon("./data/Images/Logo.png");
         Image image = icon.getImage();
         Image resizeImage = image.getScaledInstance(400, 400, Image.SCALE_SMOOTH);
@@ -62,13 +75,37 @@ public class NutriWorkDiaryApp {
         JLabel logo = new JLabel("");
         logo.setIcon(icon);
         logo.setBounds(210, -160, 400, 400);
-
-
-
-        allButtons();
         frame.getContentPane().add(logo);
+    }
 
 
+    // EFFECTS: adds a Workout Logo onto the Main Window
+    private void workoutGif() {
+        ImageIcon icon = new ImageIcon("./data/Images/MainWorkout.gif");
+        Image image = icon.getImage();
+        Image resizeImage = image.getScaledInstance(250, 250, Image.SCALE_DEFAULT);
+        icon = new ImageIcon(resizeImage);
+
+
+        JLabel workoutGif = new JLabel(icon);
+//        workoutGif.setIcon(icon);
+        workoutGif.setBounds(-60, 120, 400, 400);
+        frame.getContentPane().add(workoutGif);
+    }
+
+
+    // EFFECTS: adds a Meal Logo onto the Main Window
+    private void mealGif() {
+        ImageIcon icon = new ImageIcon("./data/Images/MainMeal.gif");
+        Image image = icon.getImage();
+        Image resizeImage = image.getScaledInstance(400, 300, Image.SCALE_DEFAULT);
+        icon = new ImageIcon(resizeImage);
+
+
+        JLabel mealGif = new JLabel(icon);
+//        workoutGif.setIcon(icon);
+        mealGif.setBounds(585, 195, 250, 250);
+        frame.getContentPane().add(mealGif);
     }
 
     // EFFECTS: adds all the buttons to the main window
@@ -129,8 +166,14 @@ public class NutriWorkDiaryApp {
         addWorkout.setBounds(100, 10, 90, 50);
         addWorkout.setCursor(handCursor);
 //                addWorkout.setVisible(true);
+//        ImageIcon icon = new ImageIcon("./data/Images/MainMeal.gif");
+//        Image image = icon.getImage();
+//        Image resizeImage = image.getScaledInstance(90, 50, Image.SCALE_DEFAULT);
+//        icon = new ImageIcon(resizeImage);
+//        addWorkout.setIcon(icon);
+//
         choose.add(addWorkout);
-
+//        addWorkoutGif();
         addWorkout.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

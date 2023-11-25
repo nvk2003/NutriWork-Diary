@@ -23,6 +23,9 @@ public class AddWorkout extends JFrame {
     private JTextField day;
     private String days;
     private JButton cancelButton;
+    private JLabel addWorkoutGif;
+    private JLabel errorWorkoutGif;
+    private JLabel casualMealGif;
 
     // EFFECTS: constructs the GUI for the Add Workouts window
     public AddWorkout(ListsMaker workoutsAndMeals) {
@@ -37,12 +40,25 @@ public class AddWorkout extends JFrame {
     private void mainWindow() {
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
         setMinimumSize(new Dimension(WIDTH, HEIGHT));
+        setResizable(false);
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
         panel = new JPanel();
         add(panel);
         panel.setLayout(null);
         panel.setBackground(Color.white);
+        errorWorkoutGif = new JLabel();
+        addWorkoutGif = new JLabel();
+        casualMealGif = new JLabel();
+        // I did the below 4 lines because if you remove this,
+        // then I need to press the Add Button for two times for the Gif to appear
+        addWorkoutGif();
+        addWorkoutGif.setVisible(false);
+        errorWorkoutGif();
+        errorWorkoutGif.setVisible(false);
+        casualMealGif();
+        casualMealGif.setVisible(true);
+
 
 
         addLabelsAndTextBoxes();
@@ -225,12 +241,15 @@ public class AddWorkout extends JFrame {
                 errorMsgs();
                 if (errorMsgs()) {
                     makeWorkout();
+                    addWorkoutGif();
                     textsBackToNormal();
 
                     if (workoutsAndMeals.getWorkouts().size() != 0) {
                         cancelButton.setVisible(false);
                         doneButton();
                     }
+                } else {
+                    errorWorkoutGif();
                 }
 
 
@@ -296,7 +315,7 @@ public class AddWorkout extends JFrame {
 
 
     // EFFECTS: makes the name textField Red if there is any error
-    public boolean nameErrorMsg() {
+    private boolean nameErrorMsg() {
         if (name.getText().strip().equals("Enter Workout Name")) {
             textBoxError(name);
             return false;
@@ -308,7 +327,7 @@ public class AddWorkout extends JFrame {
 
 
     // EFFECTS: makes the sets textField Red if there is any error
-    public boolean setsErrorMsg() {
+    private boolean setsErrorMsg() {
         if (!sets.getText().strip().equals("Enter No. of Sets")) {
             try {
                 Double.parseDouble(sets.getText().strip());
@@ -331,7 +350,7 @@ public class AddWorkout extends JFrame {
     }
 
     // makes the reps textField RED if there is any error
-    public boolean repsErrorMsg() {
+    private boolean repsErrorMsg() {
         if (!reps.getText().strip().equals("Enter No. of Reps")) {
             try {
                 Double.parseDouble((reps.getText().strip()));
@@ -355,7 +374,7 @@ public class AddWorkout extends JFrame {
 
 
     // EFFECTS: makes the day textField Red if there is any error
-    public boolean dayErrorMsg() {
+    private boolean dayErrorMsg() {
         if (day.getText().strip().equals("Enter Day of the Week")
                 || (days.equals(day.getText().strip().toLowerCase()))) {
             textBoxError(day);
@@ -366,33 +385,10 @@ public class AddWorkout extends JFrame {
         }
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     // MODIFIES: this
     // EFFECTS: if there are any errors in the TextFields,
     //          then changes the textField colour to RED
-    public void textBoxError(JTextField textField) {
+    private void textBoxError(JTextField textField) {
         textField.setBackground(Color.decode("#E5AAAA"));
         textField.setForeground(Color.black);
 //        textField.setForeground(Color.RED);
@@ -401,50 +397,23 @@ public class AddWorkout extends JFrame {
 
 
 
-    // EFFECTS: gives the error messages for the sets and reps
-    //          to make sure the user inputs the correct data
-    private void elseMethods() {
-        try {
-            Integer.parseInt(sets.getText().strip());
-            Integer.parseInt(reps.getText().strip());
-            makeWorkout();
-            textsBackToNormal();
-
-            if (workoutsAndMeals.getWorkouts().size() != 0) {
-                cancelButton.setVisible(false);
-                doneButton();
-            }
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Please Enter Valid Input For Sets/Reps");
-        }
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//    // EFFECTS: gives the error messages for the sets and reps
+//    //          to make sure the user inputs the correct data
+//    private void elseMethods() {
+//        try {
+//            Integer.parseInt(sets.getText().strip());
+//            Integer.parseInt(reps.getText().strip());
+//            makeWorkout();
+//            textsBackToNormal();
+//
+//            if (workoutsAndMeals.getWorkouts().size() != 0) {
+//                cancelButton.setVisible(false);
+//                doneButton();
+//            }
+//        } catch (NumberFormatException e) {
+//            JOptionPane.showMessageDialog(null, "Please Enter Valid Input For Sets/Reps");
+//        }
+//    }
 
     // EFFECTS: adds the done button to the window
     private void doneButton() {
@@ -533,5 +502,43 @@ public class AddWorkout extends JFrame {
         reps.setForeground(Color.lightGray);
         day.setForeground(Color.lightGray);
     }
+
+    // EFFECTS: adds a confirmation GIF onto the panel
+    private void addWorkoutGif() {
+        casualMealGif.setVisible(false);
+        errorWorkoutGif.setVisible(false);
+        ImageIcon icon = new ImageIcon("./data/Images/AddWorkout.gif");
+
+        addWorkoutGif.setIcon(icon);
+        addWorkoutGif.setBounds(400, 60, 250, 250);
+        addWorkoutGif.setVisible(true);
+        panel.add(addWorkoutGif);
+    }
+
+    // EFFECTS: adds an Error GIF onto the panel
+    private void errorWorkoutGif() {
+        casualMealGif.setVisible(false);
+        addWorkoutGif.setVisible(false);
+        ImageIcon icon = new ImageIcon("./data/Images/ErrorWorkout.gif");
+
+        errorWorkoutGif.setIcon(icon);
+        errorWorkoutGif.setBounds(410, 60, 250, 250);
+        errorWorkoutGif.setVisible(true);
+        panel.add(errorWorkoutGif);
+    }
+
+    // EFFECTS: adds a Casual GIF onto the panel
+    private void casualMealGif() {
+        ImageIcon icon = new ImageIcon("./data/Images/CasualWorkout.gif");
+//        Image image = icon.getImage();
+//        Image resizeImage = image.getScaledInstance(400, 300, Image.SCALE_DEFAULT);
+//        icon = new ImageIcon(resizeImage);
+
+        casualMealGif.setIcon(icon);
+        casualMealGif.setBounds(410, 60, 250, 250);
+        casualMealGif.setVisible(true);
+        panel.add(casualMealGif);
+    }
+
 
 }

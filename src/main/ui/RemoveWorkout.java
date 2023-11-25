@@ -285,7 +285,7 @@ public class RemoveWorkout extends JFrame {
     // MODIFIES: this
     // EFFECTS: if there are any errors in the TextFields,
     //          then changes the textField colour to RED
-    public void textBoxError(JTextField textField) {
+    private void textBoxError(JTextField textField) {
         textField.setBackground(Color.decode("#E5AAAA"));
         textField.setForeground(Color.black);
 //        textField.setForeground(Color.RED);

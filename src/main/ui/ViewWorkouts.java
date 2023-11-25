@@ -51,8 +51,10 @@ public class ViewWorkouts extends JFrame {
         panel.setBackground(Color.white);
         panel.setLayout(new BorderLayout());
 //        panel.setLayout(new GridLayout(1,2));
+        viewWorkoutsGif();
         makeListsOnPanel();
         makeButtonsOnPanel();
+
     }
 
     // EFFECTS: makes the list of workouts that can be printed onto the window
@@ -148,6 +150,20 @@ public class ViewWorkouts extends JFrame {
         });
 
         return viewWorkoutsByDayButton;
+    }
+
+    // EFFECTS: creates a View Workout Gif and adds it the panel
+    private void viewWorkoutsGif() {
+        ImageIcon icon = new ImageIcon("./data/Images/View.gif");
+        Image image = icon.getImage();
+        Image resizeImage = image.getScaledInstance(300, 300, Image.SCALE_DEFAULT);
+        icon = new ImageIcon(resizeImage);
+
+        JLabel viewWorkoutsGif = new JLabel(icon);
+//        viewWorkoutsGif.setIcon(icon);
+        viewWorkoutsGif.setBounds(450, 40, 300, 300);
+        viewWorkoutsGif.setVisible(true);
+        panel.add(viewWorkoutsGif);
     }
 
 }
