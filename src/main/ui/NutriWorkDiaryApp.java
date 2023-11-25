@@ -9,6 +9,8 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 
 // Represents a NutriWorkDairyApp's Main Window for the user to start using the application
@@ -441,7 +443,8 @@ public class NutriWorkDiaryApp {
             public void actionPerformed(ActionEvent e) {
                 try {
                     workoutsAndMeals = jsonReader.read();
-                    JOptionPane.showMessageDialog(null, "Successfully Loaded Data !");
+//                    JOptionPane.showMessageDialog(null, "Successfully Loaded Data !");
+                    loadDialog();
                 } catch (IOException a) {
                     JOptionPane.showMessageDialog(null,
                             "Unable to read from file: " + JSON_LOCATION);
@@ -467,7 +470,8 @@ public class NutriWorkDiaryApp {
                     jsonWriter.write(workoutsAndMeals);
                     jsonWriter.close();
 
-                    JOptionPane.showMessageDialog(null, "Successfully Saved Data !");
+//                    JOptionPane.showMessageDialog(null, "Successfully Saved Data !");
+                    saveDialog();
                 } catch (IOException a) {
                     JOptionPane.showMessageDialog(null,
                             "Unable to read from file: " + JSON_LOCATION);
@@ -490,6 +494,62 @@ public class NutriWorkDiaryApp {
             @Override
             public void actionPerformed(ActionEvent e) {
                 frame.dispose();
+//                System.exit(0);
+                quitDialog();
+            }
+        });
+    }
+
+
+    // EFFECTS: creates the dialog box that is displayed when Save button is clicked
+    public void saveDialog() {
+        JDialog dialog = new JDialog();
+        dialog.setSize(300, 190);
+        JLabel saveGif = new JLabel("");
+        ImageIcon icon = new ImageIcon("./data/Images/Save.gif");
+//        Image image = icon.getImage();
+//        Image resizeImage = image.getScaledInstance(400, 400, Image.SCALE_DEFAULT);
+//        icon = new ImageIcon(resizeImage);
+        saveGif.setIcon(icon);
+        saveGif.setBounds(400, -10, 450, 400);
+        dialog.add(saveGif);
+        dialog.setLocationRelativeTo((Component) null);
+        dialog.setResizable(false);
+        dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        dialog.setVisible(true);
+    }
+
+    // EFFECTS: creates the dialog box that is displayed when Load button is clicked
+    public void loadDialog() {
+        JDialog dialog = new JDialog();
+        dialog.setSize(393, 300);
+        JLabel loadGif = new JLabel("");
+        loadGif.setIcon(new ImageIcon("./data/Images/Load.gif"));
+        loadGif.setBounds(400, -10, 450, 400);
+        dialog.add(loadGif);
+        dialog.setLocationRelativeTo((Component) null);
+        dialog.setResizable(false);
+        dialog.setVisible(true);
+        dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+    }
+
+
+    // EFFECTS: creates the dialog box that is displayed when Quit button is clicked
+    public void quitDialog() {
+        JDialog dialog = new JDialog();
+        dialog.setSize(348, 240);
+        JLabel quitGif = new JLabel("");
+        quitGif.setIcon(new ImageIcon("./data/Images/Quit.gif"));
+        quitGif.setBounds(400, -10, 450, 400);
+        dialog.add(quitGif);
+        dialog.setResizable(false);
+        dialog.setLocationRelativeTo((Component) null);
+        dialog.setVisible(true);
+
+        dialog.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                dialog.dispose();
                 System.exit(0);
             }
         });
