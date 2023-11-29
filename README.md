@@ -80,8 +80,18 @@ their meal and workout routines.
 - When the user removes an existing Meal from the list, an Event gets added to the EventLog
   and prints out onto the console after quitting the application.
     - For Example, removing an existing Meal with the details (Name: Soup, Calories: 120.24, Meal Time: Lunch, Day:
-      Wednesday)
-      prints a new Event onto the console that looks like this:
+      Wednesday) prints a new Event onto the console that looks like this:
       ![](./data/Images/RemoveMeal.png)
 
       
+
+## Phase 4: Task 3
+
+![](./UML_Design_Diagram.jpg)
+
+- I would do refactoring between ViewAll and ViewAllByDay, ViewMeals and ViewMealsByDay, and ViewWorkouts and 
+ViewWorkoutsByDay because these classes are pretty similar as the main differences are just adding the day. 
+Maybe I will extend the ViewAllByDay Class from the ViewAll Class and override some methods to make the ViewAllByDay 
+Class with fewer lines of code. 
+- I would also create a new Class with some methods for the Visual content because I was resizing the images everytime.
+So making a new Class and just calling the methods would make it easier to understand with fewer lines of code.
