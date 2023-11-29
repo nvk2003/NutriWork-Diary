@@ -1,5 +1,7 @@
 package ui;
 
+import model.Event;
+import model.EventLog;
 import model.ListsMaker;
 import persistence.JsonReader;
 import persistence.JsonWriter;
@@ -55,9 +57,6 @@ public class NutriWorkDiaryApp {
         frame.setLocationRelativeTo(null);
         frame.getContentPane().setLayout(null);
         frame.getContentPane().setBackground(Color.white);
-
-
-
 
 
         allButtons();
@@ -495,6 +494,7 @@ public class NutriWorkDiaryApp {
             public void actionPerformed(ActionEvent e) {
                 frame.dispose();
 //                System.exit(0);
+                printEventLog(EventLog.getInstance());
                 quitDialog();
             }
         });
@@ -555,4 +555,11 @@ public class NutriWorkDiaryApp {
         });
     }
 
+
+    // EFFECTS: prints out the EventLog that is recorded
+    public void printEventLog(EventLog el) {
+        for (Event next : el) {
+            System.out.println(next.toString() + "\n");
+        }
+    }
 }

@@ -101,8 +101,6 @@ public class ListsMakerTest {
     }
 
 
-
-
     @Test
     void testAddMultipleMeals() {
         Meal meal1 = new Meal("Burger", 210.20, "Lunch", "Friday");

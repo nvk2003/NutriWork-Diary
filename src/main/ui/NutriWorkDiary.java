@@ -183,7 +183,6 @@ public class NutriWorkDiary {
         int reps = input.nextInt();
 
 
-
         setDay();
 
         Workout workout = new Workout(name, sets, reps, day);
@@ -502,7 +501,7 @@ public class NutriWorkDiary {
             jsonWriter.open();
             jsonWriter.write(workoutsAndMeals);
             jsonWriter.close();
-            System.out.println("\nSaved " +  workoutsAndMeals.getName() + " to " + JSON_STORE);
+            System.out.println("\nSaved " + workoutsAndMeals.getName() + " to " + JSON_STORE);
         } catch (FileNotFoundException e) {
             System.out.println("Unable to write to file: " + JSON_STORE);
         }

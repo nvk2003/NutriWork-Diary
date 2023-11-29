@@ -60,7 +60,6 @@ public class AddWorkout extends JFrame {
         casualMealGif.setVisible(true);
 
 
-
         addLabelsAndTextBoxes();
         addButtons();
     }
@@ -277,7 +276,6 @@ public class AddWorkout extends JFrame {
         return nameErrorMsg() && setsErrorMsg() && repsErrorMsg() && dayErrorMsg();
 
 
-
 //        if (name.getText().strip().equals("Enter Workout Name")) {
 //            JOptionPane.showMessageDialog(null, "Please Enter Workout Name");
 //        } else if (sets.getText().strip().equals("Enter No. of Sets")
@@ -394,7 +392,6 @@ public class AddWorkout extends JFrame {
 //        textField.setForeground(Color.RED);
 
     }
-
 
 
 //    // EFFECTS: gives the error messages for the sets and reps

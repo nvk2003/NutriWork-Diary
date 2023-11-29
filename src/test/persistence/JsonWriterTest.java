@@ -61,7 +61,7 @@ class JsonWriterTest extends JsonTest {
             lm = reader.read();
             assertEquals("General Workouts and Meals", lm.getName());
             List<Workout> workouts = lm.getWorkouts();
-            List<Meal> meals  = lm.getMeals();
+            List<Meal> meals = lm.getMeals();
             assertEquals(1, workouts.size());
             assertEquals(1, meals.size());
             checkWorkout("Squats", 5, 10, "Monday", workouts.get(0));

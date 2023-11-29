@@ -22,7 +22,7 @@ public class WorkoutTest {
     }
 
     @Test
-    void  testMakeWorkout() {
+    void testMakeWorkout() {
         assertEquals("Squats: 3 sets of 10 reps", testWorkout.getWorkout());
     }
 }

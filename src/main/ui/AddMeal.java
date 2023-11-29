@@ -244,22 +244,22 @@ public class AddMeal extends JFrame {
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                    getDay();
-                    getMealTime();
+                getDay();
+                getMealTime();
 //                    errorMsgs();
-                    if (errorMsgs()) {
-                        makeMeal();
-                        textsBackToNormal();
-                        addMealGif();
+                if (errorMsgs()) {
+                    makeMeal();
+                    textsBackToNormal();
+                    addMealGif();
 
-                        if (workoutsAndMeals.getMeals().size() != 0) {
-                            cancelButton.setVisible(false);
-                            doneButton();
-                        }
-                    } else {
-                        errorMealGif();
+                    if (workoutsAndMeals.getMeals().size() != 0) {
+                        cancelButton.setVisible(false);
+                        doneButton();
                     }
+                } else {
+                    errorMealGif();
                 }
+            }
         });
     }
 
@@ -302,7 +302,6 @@ public class AddMeal extends JFrame {
 //                JOptionPane.showMessageDialog(null, "Please Enter Valid No. Of Calories");
 //            }
 //        }
-
 
 
     }

@@ -178,7 +178,6 @@ public class ViewAllByDay extends JFrame {
     }
 
 
-
     // EFFECTS: makes a list with 7 days of the week
     private void makeDays() {
         days.add("Monday");
@@ -195,7 +194,6 @@ public class ViewAllByDay extends JFrame {
     private ArrayList<String> getDays() {
         return days;
     }
-
 
 
     // EFFECTS: adds all the buttons to the View All By Day window

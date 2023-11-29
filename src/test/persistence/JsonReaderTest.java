@@ -44,7 +44,7 @@ class JsonReaderTest extends JsonTest {
             ListsMaker lm = reader.read();
             assertEquals("General Workouts and Meals", lm.getName());
             List<Workout> workouts = lm.getWorkouts();
-            List<Meal> meals  = lm.getMeals();
+            List<Meal> meals = lm.getMeals();
             assertEquals(2, workouts.size());
             assertEquals(1, meals.size());
             checkWorkout("Squats", 4, 10, "Monday", workouts.get(0));

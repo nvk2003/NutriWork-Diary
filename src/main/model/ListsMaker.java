@@ -34,19 +34,23 @@ public class ListsMaker implements Writable {
     // EFFECTS: adds a given workout to the list of workouts
     public void addWorkout(Workout workout) {
         this.workouts.add(workout);
+        EventLog.getInstance().logEvent(new Event("Added A Workout -> " + workout.getWorkout()
+                + " on " + workout.getDay() + " to the list."));
     }
 
     // MODIFIES: this, workouts
     // EFFECTS: removes a given workout from the list of workouts
     public void removeWorkout(Workout workout) {
         this.workouts.remove(workout);
+        EventLog.getInstance().logEvent(new Event("Removed A Workout -> " + workout.getWorkout()
+                + " on " + workout.getDay() + " from the list."));
     }
 
     // MODIFIES: this, workoutsByDay
     // EFFECTS: sorts out the list of workouts by the given day and produces a list of workouts for that day
     public void makeWorkoutsByDay(String day) {
         this.workoutsByDay = new ArrayList<>();
-        for (Workout workout: workouts) {
+        for (Workout workout : workouts) {
             if (workout.getDay().equals(day)) {
                 this.workoutsByDay.add(workout);
             }
@@ -63,27 +67,29 @@ public class ListsMaker implements Writable {
     }
 
 
-
-
     // MEAL
 
     // MODIFIES: this, meals
     // EFFECTS: adds a given meal to the list of meals
     public void addMeal(Meal meal) {
         this.meals.add(meal);
+        EventLog.getInstance().logEvent(new Event("Added A Meal -> " + meal.getMeal()
+                + " on " + meal.getDay() + " to the list."));
     }
 
     // MODIFIES: this, meals
     // EFFECTS: removes a given meal from the list of meals
     public void removeMeal(Meal meal) {
         this.meals.remove(meal);
+        EventLog.getInstance().logEvent(new Event("Removed A Meal -> " + meal.getMeal()
+                + " on " + meal.getDay() + " from the list."));
     }
 
     // MODIFIES: this, mealsByDay
     // EFFECTS: sorts out the list of meals by the given day and produces a list of meals for that day
     public void makeMealsByDay(String day) {
         this.mealsByDay = new ArrayList<>();
-        for (Meal meal: meals) {
+        for (Meal meal : meals) {
             if (meal.getDay().equals(day)) {
                 this.mealsByDay.add(meal);
             }
@@ -103,7 +109,7 @@ public class ListsMaker implements Writable {
     // EFFECTS: constructs three different files in the json file
     @Override
     public JSONObject toJson() {
-        JSONObject json  = new JSONObject();
+        JSONObject json = new JSONObject();
         json.put("name", name);
         json.put("workouts", workoutsToJson());
         json.put("meals", mealsToJson());

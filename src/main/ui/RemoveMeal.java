@@ -281,7 +281,6 @@ public class RemoveMeal extends JFrame {
     }
 
 
-
     // EFFECTS: adds a Remove GIF onto the panel
     private void removeGif() {
         ImageIcon icon = new ImageIcon("./data/Images/Remove.gif");
