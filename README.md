@@ -87,7 +87,7 @@ their meal and workout routines.
 
 ## Phase 4: Task 3
 
-![](./UML_Design_Diagram.jpg)
+![](./UML_Design_Diagram.jpeg)
 
 - I would do refactoring between ViewAll and ViewAllByDay, ViewMeals and ViewMealsByDay, and ViewWorkouts and 
 ViewWorkoutsByDay because these classes are pretty similar as the main differences are just adding the day. 
