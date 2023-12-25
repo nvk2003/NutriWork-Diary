@@ -37,7 +37,7 @@ their meal and workout routines.
 - As a user, I want to be able to save both workouts and meals while using the application for future use.
 - As a user, I want to be able to load both the workouts and meals data when I reopen the application.
 
-## Instructions for Grader
+## Instructions for Users
 
 - You can add multiple Workouts by clicking on Add Button on the main window and choosing Workout from the dialog box
 - You can add multiple Meals by clicking on Add Button on the main window and choosing Meal from the dialog box
@@ -54,7 +54,7 @@ their meal and workout routines.
 - You can save both Meals and Workouts at once by clicking on Save Button on the main window
 - You can quit the application by clicking on the Quit Button on the main window
 
-## Phase 4: Task 2
+## EventLog
 
 - When the user adds a new Workout to the list, an Event gets added to the EventLog
   and prints out onto the console after quitting the application.
@@ -85,13 +85,6 @@ their meal and workout routines.
 
       
 
-## Phase 4: Task 3
+## UML Diagram
 
 ![](./UML_Design_Diagram.jpeg)
-
-- I would do refactoring between ViewAll and ViewAllByDay, ViewMeals and ViewMealsByDay, and ViewWorkouts and 
-ViewWorkoutsByDay because these classes are pretty similar as the main differences are just adding the day. 
-Maybe I will extend the ViewAllByDay Class from the ViewAll Class and override some methods to make the ViewAllByDay 
-Class with fewer lines of code. 
-- I would also create a new Class with some methods for the Visual content because I was resizing the images everytime.
-So making a new Class and just calling the methods would make it easier to understand with fewer lines of code.
